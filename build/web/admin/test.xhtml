@@ -1,0 +1,660 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Welcome</title>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <style type="text/css"> 
+           body
+        {
+        background-image:url("/medical/faces/resources/images/bgb.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 160%;
+        
+        }
+       
+      
+        
+        </style>
+        
+        <h:outputStylesheet library="css" name="font-awesome.css" />
+        <h:outputStylesheet library="css" name="home.css" />
+    </h:head>
+        
+    <h:body>
+       
+        <p:tabView id="first1" dynamic="false" scrollable="true" cache="false" effect="blind" style=" margin-left: 43px;width: 93%;">
+        
+            <p:tab title="User" >
+                
+                <p:tabView  id="first" dynamic="false" scrollable="true" effect="blind" cache="false">
+                    <p:tab title="List of Users">
+                     
+                 <h:form id="deleted">
+                    <p:growl id="deletedg" showDetail="false"/>   
+                 <hr />
+                <hr />
+               
+                
+                <br/>
+                    <p:panel style="font-family:Gill;font-size: 22px;" header="List Of Medicine/Products" >
+                        <p:dataTable style="font-family:Gill;font-size: 17px; " var="user" value="#{list.adduser}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,15"
+                         widgetVar="userTable"> 
+               
+                            <p:column width="5%" sortBy="#{user.uid}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="Id"  /> 
+                                </f:facet>
+                                    <h:outputText value="#{user.uid}" />
+                            </p:column> 
+                      
+                            <p:column width="12%" sortBy="#{user.username}" filterBy="#{user.username}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="User Name" /> 
+                                </f:facet>
+                                <h:outputText value="#{user.username}" />
+                            </p:column> 
+                           
+                            <p:column width="20%" sortBy="#{user.email}" filterBy="#{user.email}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="Email" /> 
+                                </f:facet>
+                                <h:outputText value="#{user.email}" />
+                            </p:column>
+                     
+                           <p:column width="8%" sortBy="#{user.phoneno}" filterBy="#{user.phoneno}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="Phone No." /> 
+                                </f:facet>
+                               <h:outputText value="#{user.phoneno}" />
+                           </p:column>
+                           <p:column width="12%" sortBy="#{user.address}" filterBy="#{user.address}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="Address" /> 
+                                </f:facet>
+                                <h:outputText value="#{user.address}" />
+                           </p:column> 
+               
+                            <p:column width="19%" sortBy="#{user.pincode}"> 
+                                <f:facet name="header"> 
+                                    <h:outputText style="font-size:20px" value="Pincode" /> 
+                                </f:facet>
+                                <h:outputText value="#{user.pincode}" />
+                           </p:column> 
+            </p:dataTable>
+            </p:panel>
+              
+     
+                     
+                 
+                 </h:form>
+                    </p:tab>
+            </p:tabView>   
+        </p:tab>
+        
+            <p:tab title="Staffs">
+                <p:tabView id="second" dynamic="false" scrollable="true" effect="blind" cache="false">
+                 <p:tab title="New Staff">
+                 <h:form id="ven">
+                 <p:growl id="veng" showDetail="false"/>
+               
+                <hr />
+                <hr />
+               
+                
+             
+                <table>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+                <tr>
+                    <td><h:outputText value="Staff Name :"  style="font-size: 22px; font-weight: bold;font-family: Gill;"/></td>
+                
+                   
+                    <td><center><p:inputText id="sname"  autocomplete="off" value="#{call.sname}" style="height:22px; width:80%;" placeholder="Service Name..." required="true" requiredMessage="Please Specify the Service Name.."/></center></td>
+                   
+                
+                   <td><h:outputText value="Service Type :" style="font-size: 22px; font-weight: bold;font-family: Gill;"/></td>
+            
+                    
+               
+                   <td><center><p:inputText id="stype"  autocomplete="off" value="#{call.stype}" style="height:22px; width:80%;" placeholder="Service Type..." required="true" requiredMessage="Please Specify the Service type.."/></center></td>
+                   
+                  </tr>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+                 
+                <tr>
+                   
+                
+                   
+                 <td><h:outputText value="Email-Id :" style="font-size: 22px; font-weight: bold;font-family: Gill;"/></td>
+                
+                   
+                 <td><center><p:inputText validatorMessage="Invalid Email.." id="eid"  autocomplete="off" value="#{call.semail}" style="height:22px; width:80%;" placeholder="Email-Id..." required="true" requiredMessage="Please Specify the Email Id..">
+                               <f:validateRegex for="eid" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"/>
+                                                       
+                           </p:inputText>
+                       
+                       </center></td>
+           
+                   <td><h:outputText value="Phone No. :" style="font-size: 22px; font-weight: bold;font-family: Gill;"/></td>
+              
+                   <td><center>  <p:inputMask autocomplete="off" id="phone" value="#{call.sphone}" converterMessage="length must be a number greater than zero" mask="99999999" style="height:22px; width:80%;" placeholder="Enter Contact Number..." required="true" requiredMessage="Please Specify a Valid Phone No. .."/>
+                    </center></td>
+             
+                
+                </tr>
+               
+                <tr></tr>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+                 
+       
+                
+               
+               <tr>  
+                   <td><h:outputText value="Company Address :" style="font-size: 22px; font-weight: bold;font-family: Gill;"/></td>
+                
+                    
+                   <td><center><p:inputTextarea rows="2" cols="16" id="companyad"  value="#{call.sadd}" placeholder="Specify the Company Address..." required="true" requiredMessage="Please Specify the Company Address.."/></center></td>
+             
+               
+               
+               </tr>
+                <tr></tr>
+               <tr></tr>
+               <tr></tr>
+               <tr></tr>
+                
+               <tr>
+                   <td colspan="2"></td>
+                   <td><center><p:commandButton styleClass="btn btn-default" icon="ui-icon-adds" value="Add" action="#{call.addstaff()}" update="ven" style="font-family: Gill;"/></center></td>
+            
+               </tr> 
+               
+               
+            </table>
+                 <br/>
+              
+              <p:panel style="font-family:Gill;font-size: 22px;" header="List Of Staffs" toggleable="false" toggleOrientation="horizontal">
+                  <p:dataTable editable="true" style="font-family:Gill;font-size: 17px; " var="st" value="#{list.addslist}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,15" > 
+                <p:ajax event="rowEdit" listener="#{venadd.onEdit}" update=":first1:second:ven:veng" />     
+                      
+                <p:column width="8.6%" sortBy="#{st.sid}" filterBy="#{st.sid}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Id" /> 
+                    </f:facet>
+                          <center><h:outputText value="#{st.sid}" /></center>
+                      </p:column> 
+                   
+                <p:column width="17.5%" sortBy="#{st.sname}" filterBy="#{st.sname}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Name" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.sname}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.sname}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                         
+                </p:column> 
+                <p:column width="18%" sortBy="#{st.semail}" filterBy="#{st.semail}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Email ID" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.semail}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.semail}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                <p:column width="7.5%" sortBy="#{st.sphone}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px;" value="Phone Number" /> 
+                    </f:facet>
+                    <h:outputText value="#{st.sphone}" />
+                </p:column> 
+                
+                
+                <p:column width="10%" sortBy="#{st.sadd}" filterBy="#{st.sadd}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Address" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.sadd}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                        <p:inputText value="#{st.sadd}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                <p:column width="20%" sortBy="#{st.stype}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px" value="Service Type" /> 
+                    </f:facet>
+                 <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.stype}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.stype}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                
+                <p:column width="10%" sortBy="#{st.jdate}" filterBy="#{st.jdate}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Joining Date" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.jdate}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                        <p:inputText value="#{st.jdate}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                 <p:column headerText="Edit" style="width:3%">  
+                             <p:rowEditor />  
+                      </p:column> 
+                
+            </p:dataTable>
+            </p:panel>
+  
+                      
+                      </h:form>
+                      
+                 </p:tab>
+                
+                  <p:tab title="Delete/Remove Staff">
+                      <h:form id="delv">
+                           <p:growl id="delvg" showDetail="false"/>
+               
+                <hr />
+                <hr />
+                <br/>
+                
+                    <table style="margin-left:90px">
+                       
+                        
+                        <i style="margin-left:100px;color:green"  class="fa fa-exclamation-triangle fa-3x"></i>
+                        &nbsp;&nbsp;
+                        <span style="margin-left:50x;font-size:28px;font-family:Gill"><b>Deleting the vendor will delete all the Medicines/Products Associated with it !!!!</b></span>
+                     <br/>
+                     <br/>
+                     <tr>
+                     <td>   <p:selectOneMenu  id="did"  style="width:105%" required="true" value="#{vendelete1.did}" requiredMessage="PLease Select the Vendor ID..">
+                            
+                            <f:selectItem  itemLabel="--Select Vendor--" itemValue=""/>
+                               <f:selectItems  value="#{vendelete1.bind1}"/>  
+                           
+                            </p:selectOneMenu>
+                         
+                   </td>
+                     
+                     </tr>
+                     <tr></tr>
+                      <tr></tr>
+                       <tr></tr>
+                        <tr></tr>
+                        <tr>
+                        <td > <p:commandButton  icon="ui-icon-delete" value="Delete" action="#{vendelete1.delete}" update="delv" style="margin-left:60px;font-family: Gill;">
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        <p:confirmDialog global="true">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog></td>
+                   </tr> 
+          
+                </table>
+               
+             <br/>
+              <p:panel style="font-family:Gill;font-size: 22px;" header="List Of Vendors" toggleable="false" toggleOrientation="horizontal">
+                  <p:dataTable style="font-family:Gill;font-size: 17px; " var="ven" value="#{vendelete2.addven}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,15" > 
+               
+                      <p:column width="10%" sortBy="#{ven.vid}" filterBy="#{ven.vid}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Id" /> 
+                    </f:facet>
+                    <h:outputText value="#{ven.vid}" />
+                </p:column> 
+                <p:column width="15%" sortBy="#{ven.vname}" filterBy="#{ven.vname}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Name" /> 
+                    </f:facet>
+                    <h:outputText value="#{ven.vname}" />
+                </p:column> 
+                <p:column width="20%" sortBy="#{ven.veid}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Email ID" /> 
+                    </f:facet>
+                    <p:link style="color:blue" target="blank" href="http://www.yahoo.com"> <h:outputText value="#{ven.veid}" /></p:link>
+                </p:column> 
+                      <p:column width="10%" sortBy="#{ven.vpn}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px;" value="Phone Number" /> 
+                    </f:facet>
+                    <h:outputText value="#{ven.vpn}" />
+                </p:column> 
+                <p:column width="10%" sortBy="#{ven.vconame}" filterBy="#{ven.vconame}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Company Name" /> 
+                    </f:facet>
+                    <h:outputText value="#{ven.vconame}" />
+                </p:column> 
+             <p:column width="20%" sortBy="#{ven.vadd}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px" value="Company Address" /> 
+                    </f:facet>
+                    <h:outputText value="#{ven.vadd}" />
+                </p:column> 
+                
+            </p:dataTable>
+            </p:panel>
+  
+                          
+                          
+                      </h:form>
+             
+                  </p:tab>
+                 
+               
+             </p:tabView>   
+          </p:tab>  
+                
+               
+           
+           
+       
+       
+       
+            
+        
+        
+     
+        
+        
+        <!--services Tab Start here-->
+            <p:tab title="Service" >
+                
+                 
+                <p:tabView  id="third" dynamic="false" scrollable="true" effect="blind" cache="false">
+                
+                
+                 <p:tab title="Services">
+                 <h:form id="ven">
+                 <p:growl id="veng" showDetail="false"/>
+               
+                 
+                 
+                 
+                   <table style="margin-left:90px"> 
+              <br/>
+               
+                
+                        <i style="margin-left:100px;color:green"  class="fa fa-exclamation-triangle fa-3x"></i>
+                        &nbsp;&nbsp;
+                         <span style="margin-left:50x;font-size:28px;font-family:Gill"><b>Deleting the Medicine will delete all the Details/Stocks Associated with it !!!!</b></span>
+                         
+                         <br/>
+                         
+                     <br/>
+                      <tr>
+                         <td> <h:outputText style="font-size:20px" value="Service Id :" /> </td>
+                         <td>   <p:selectOneMenu  id="sid"  style="width:105%" required="true" value="#{service.sid}" requiredMessage="PLease Select the Medicine ID..">
+                            
+                            <f:selectItem  itemLabel="--Select ID--" itemValue=""/>
+                            <f:selectItems  value="#{service.bindserviceid}"/>  
+                           
+                            </p:selectOneMenu>
+                         
+                   </td>
+                     
+                     </tr>
+                     
+                     
+                     
+                     <tr>
+                         <td> <h:outputText style="font-size:20px" value="Staff Id :" /> </td>
+                         <td>   <p:selectOneMenu  id="did"  style="width:105%" required="true" value="#{service.staffid}" requiredMessage="PLease Select the Medicine ID..">
+                            
+                            <f:selectItem  itemLabel="--Select ID--" itemValue=""/>
+                            <f:selectItems  value="#{service.bindsid}"/>  
+                           
+                            </p:selectOneMenu>
+                         
+                   </td>
+                     
+                     </tr>
+                      <tr>
+                         <td> <h:outputText style="font-size:20px" value="Status  :" /> </td> 
+                         <td>   <p:selectOneMenu  id="st"  style="width:130%" required="true" value="#{service.sstatus}" requiredMessage="PLease Select the Medicine ID..">
+                            
+                            <f:selectItem  itemLabel="--Select ID--" itemValue=""/>
+                            <f:selectItems  value="#{service.bindstatus}"/>  
+                           
+                            </p:selectOneMenu>
+                         
+                   </td>
+                     
+                     </tr>
+                     <tr></tr>
+                      <tr></tr>
+                       <tr></tr>
+                        <tr></tr>
+                        
+                        <tr>
+                            <td> <p:commandButton  icon="ui-icon-delete" value="Delete" action="#{service.onRowEdit}" update="ven" style="margin-left:60px;font-family: Gill;">
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        <p:confirmDialog global="true">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog></td>
+                   </tr> 
+          
+                </table>
+               
+                
+              <p:panel style="font-family:Gill;font-size: 22px;" header="List Of Staffs" toggleable="false" toggleOrientation="horizontal">
+                  <p:dataTable editable="true" style="font-family:Gill;font-size: 17px; " var="st" value="#{list.addslist}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,15" > 
+                      <p:ajax event="rowEdit" listener="#{service.onEdit}" update=":first1:third:ven:veng" />     
+                      
+                <p:column width="8.6%" sortBy="#{st.sid}" filterBy="#{st.sid}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Id" /> 
+                    </f:facet>
+                          <center><h:outputText value="#{st.sid}" /></center>
+                      </p:column> 
+                   
+                <p:column width="17.5%" sortBy="#{st.sname}" filterBy="#{st.sname}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Name" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.sname}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.sname}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                         
+                </p:column> 
+                <p:column width="18%" sortBy="#{st.semail}" filterBy="#{st.semail}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Email ID" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.semail}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.semail}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                <p:column width="7.5%" sortBy="#{st.sphone}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px;" value="Phone Number" /> 
+                    </f:facet>
+                    <h:outputText value="#{st.sphone}" />
+                </p:column> 
+                
+                
+                <p:column width="10%" sortBy="#{st.sadd}" filterBy="#{st.sadd}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Address" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.sadd}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                        <p:inputText value="#{st.sadd}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                <p:column width="20%" sortBy="#{st.stype}"> 
+                    <f:facet name="header" > 
+                        <h:outputText style="font-size:20px" value="Service Type" /> 
+                    </f:facet>
+                 <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.stype}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                       <p:inputText value="#{st.stype}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                
+                <p:column width="10%" sortBy="#{st.jdate}" filterBy="#{st.jdate}"> 
+                    <f:facet name="header"> 
+                        <h:outputText style="font-size:20px" value="Joining Date" /> 
+                    </f:facet>
+                    <p:cellEditor>
+                    <f:facet name="output">
+                    <h:outputText value="#{st.jdate}" />
+                    </f:facet> 
+                    <f:facet name="input">  
+                        <p:inputText value="#{st.jdate}" style="width:90%"/>  
+                    </f:facet>  
+                     </p:cellEditor>
+                    
+                </p:column> 
+                 <p:column headerText="Edit" style="width:3%">  
+                             <p:rowEditor />  
+                      </p:column> 
+                
+            </p:dataTable>
+            </p:panel>
+  
+                      
+                      </h:form>
+                      
+                 </p:tab>
+                
+               
+                 
+               
+             </p:tabView>    
+            
+            
+            
+            
+            
+            
+            </p:tab><!--services tab End here-->
+        
+                
+        
+        
+        
+         </p:tabView>        
+       
+        
+        <h:panelGroup layout="block" class="footer">
+	
+            <hr/>
+            
+            <center>
+               
+            <table cellspacing="9px">
+             <tr>
+                
+            <td><h:graphicImage value="/resources/images/b1.jpg"  alt="brand 1" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+            
+            <td><h:graphicImage value="/resources/images/b3.jpg"  alt="brand 2" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b4.jpg"  alt="brand 3" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b5.jpg"  alt="brand 4" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b6.gif"  alt="brand 5" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b2.png"  alt="brand 6" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b8.jpg"  alt="brand 7" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b9.jpg"  alt="brand 8" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+             <td><h:graphicImage value="/resources/images/b10.jpg"  alt="brand 9" style="margin-top:8px;margin-bottom:5px" height="80" width="150"/></td>
+          
+             </tr>
+            </table>
+             
+              </center>
+                
+            <p>	<h4 align="center"><font color="blue"><b> MANOJ MEDICAL</b></font>,Copyright &copy; 2015 
+            <br>  All rights reserved.</br>   
+           </h4>
+            </p> 
+                   
+           
+                
+        </h:panelGroup>
+        
+          
+         
+      
+    </h:body>
+        
+        
+     
+</html>
+
+
+        
+
+        
